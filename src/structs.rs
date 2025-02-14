@@ -24,3 +24,19 @@ impl<'a> std::fmt::Display for Directory<'a> {
         write!(f, "{}", self.file_name)
     }
 }
+
+#[derive(clap::Parser)]
+pub struct Cli {
+    pub pattern: String,
+    pub path: std::path::PathBuf
+}
+
+impl Cli {
+    pub fn pattern(&self) -> &String {
+        &self.pattern
+    }
+
+    pub fn path(&self) -> &std::path::PathBuf {
+        &self.path
+    }
+}
