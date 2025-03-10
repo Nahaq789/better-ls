@@ -13,6 +13,9 @@ fn main() -> anyhow::Result<()> {
 
     let path = &args[1];
     let paths = std::fs::read_dir(path)?;
+
+    // first line cd ../
+    println!("key: {}  ../", KEY_SET[0]);
     for (i, path) in paths.into_iter().enumerate() {
         match path {
             Ok(it) => {
@@ -22,12 +25,23 @@ fn main() -> anyhow::Result<()> {
                 if file_type.is_file() {
                     continue;
                 }
-                println!("key: {}  {}", KEY_SET[i], folder.to_str().unwrap());
+                println!("key: {}  {}", KEY_SET[i + 1], folder.to_str().unwrap());
             }
             Err(e) => {
                 println!("{:?}", e)
             }
         }
+
+        if i == 6 {
+            println!("load more...");
+            let mut command = String::new();
+            std::io::stdin().read_line(&mut command).ok();
+        }
     }
+
+    let mut command = String::new();
+    std::io::stdin().read_line(&mut command).ok();
+
+    println!("{}", command);
     Ok(())
 }
