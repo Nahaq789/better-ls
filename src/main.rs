@@ -16,8 +16,8 @@ fn main() -> anyhow::Result<()> {
 
     // first line cd ../
     println!("key: {}  ../", KEY_SET[0]);
-    for (i, path) in paths.into_iter().enumerate() {
-        match path {
+    for (i, p) in paths.into_iter().enumerate() {
+        match p {
             Ok(it) => {
                 let folder = &it.file_name();
                 let file_type = it.file_type()?;
