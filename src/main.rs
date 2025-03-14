@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, usize};
 
 pub mod structs;
 
@@ -16,13 +16,15 @@ fn main() -> anyhow::Result<()> {
 
     // first line cd ../
     println!("key: {}  ../", KEY_SET[0]);
-    for (i, p) in paths.into_iter().enumerate() {
+    for p in paths {
+        let mut i = 0;
         match p {
             Ok(it) => {
                 let folder = &it.file_name();
                 let file_type = it.file_type()?;
 
                 if file_type.is_file() {
+                    i = i + 1;
                     continue;
                 }
                 println!("key: {}  {}", KEY_SET[i + 1], folder.to_str().unwrap());
@@ -32,7 +34,8 @@ fn main() -> anyhow::Result<()> {
             }
         }
 
-        if i == 6 {
+        if load_more(i) {
+            println!("{}", i);
             println!("load more...");
             let mut command = String::new();
             std::io::stdin().read_line(&mut command).ok();
@@ -44,4 +47,11 @@ fn main() -> anyhow::Result<()> {
 
     println!("{}", command);
     Ok(())
+}
+
+fn load_more(index: usize) -> bool {
+    if index % 10 == 0 && !index.eq(&0) {
+        return true;
+    }
+    false
 }
