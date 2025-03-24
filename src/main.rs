@@ -16,18 +16,17 @@ fn main() -> anyhow::Result<()> {
 
     // first line cd ../
     println!("key: {}  ../", KEY_SET[0]);
+    let mut i = 1;
     for p in paths {
-        let mut i = 0;
         match p {
             Ok(it) => {
                 let folder = &it.file_name();
                 let file_type = it.file_type()?;
 
                 if file_type.is_file() {
-                    i = i + 1;
                     continue;
                 }
-                println!("key: {}  {}", KEY_SET[i + 1], folder.to_str().unwrap());
+                println!("key: {}  {}", KEY_SET[i], folder.to_str().unwrap());
             }
             Err(e) => {
                 println!("{:?}", e)
@@ -35,11 +34,11 @@ fn main() -> anyhow::Result<()> {
         }
 
         if load_more(i) {
-            println!("{}", i);
             println!("load more...");
             let mut command = String::new();
             std::io::stdin().read_line(&mut command).ok();
         }
+        i += 1;
     }
 
     let mut command = String::new();
@@ -50,7 +49,7 @@ fn main() -> anyhow::Result<()> {
 }
 
 fn load_more(index: usize) -> bool {
-    if index % 10 == 0 && !index.eq(&0) {
+    if index % 10 == 0 {
         return true;
     }
     false
