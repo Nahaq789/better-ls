@@ -1,7 +1,5 @@
 use std::{env, usize};
 
-pub mod structs;
-
 const KEY_SET: &'static [&'static str] = &[
     "a", "b", "c", "d", "e", "f", "g", "h", "i", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
     "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O", "P",
