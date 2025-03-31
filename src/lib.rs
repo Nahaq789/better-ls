@@ -19,10 +19,7 @@ impl Content {
     }
 
     pub fn folder_name_as_str(&self) -> &str {
-        match self.folder_name.to_str() {
-            Some(s) => s,
-            None => "",
-        }
+        self.folder_name().to_str().unwrap_or_default()
     }
 
     pub fn is_file(&self) -> bool {

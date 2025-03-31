@@ -1,12 +1,11 @@
 use std::{
     env::{self},
     path::Path,
-    usize,
 };
 
 use better_ls::Content;
 
-const KEY_SET: [&'static str; 48] = [
+const KEY_SET: [&str; 48] = [
     "a", "b", "c", "d", "e", "f", "g", "h", "i", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
     "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O", "P",
     "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
@@ -30,9 +29,7 @@ fn main() -> anyhow::Result<()> {
         .collect();
     let contents = Content::remove_file(contents);
 
-    let mut i = 0;
-
-    for c in &contents {
+    for (i, c) in contents.iter().enumerate() {
         println!("key: {}  {}", KEY_SET[i], c.folder_name_as_str());
         if load_more(i) {
             println!("load more...");
@@ -49,7 +46,6 @@ fn main() -> anyhow::Result<()> {
                 return Ok(());
             }
         }
-        i += 1;
     }
 
     println!("Enter the key of the directory you want to move");
