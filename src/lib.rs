@@ -26,11 +26,11 @@ impl Content {
     }
 
     pub fn is_file(&self) -> bool {
-        return self.file_type.is_file();
+        self.file_type.is_file()
     }
 
     pub fn remove_file(contents: Vec<Content>) -> Vec<Content> {
-        return contents.into_iter().filter(|x| !x.is_file()).collect();
+        contents.into_iter().filter(|x| !x.is_file()).collect()
     }
 }
 
