@@ -28,8 +28,9 @@ fn main() -> anyhow::Result<()> {
         })
         .collect();
     let contents = Content::remove_file(contents);
+    let sorted_contents = Content::sort(contents);
 
-    for (i, c) in contents.iter().enumerate() {
+    for (i, c) in sorted_contents.iter().enumerate() {
         println!("key: {}  {}", KEY_SET[i], c.folder_name_as_str());
         if load_more(i) {
             println!("load more...");
@@ -40,7 +41,7 @@ fn main() -> anyhow::Result<()> {
                     Some(index) => index,
                     None => panic!(""),
                 };
-                let result = contents[index].folder_name_as_str();
+                let result = sorted_contents[index].folder_name_as_str();
                 final_path(&args[1], result);
 
                 return Ok(());
@@ -56,7 +57,7 @@ fn main() -> anyhow::Result<()> {
         Some(index) => index,
         None => panic!(""),
     };
-    let result = contents[index].folder_name_as_str();
+    let result = sorted_contents[index].folder_name_as_str();
     final_path(&args[1], result);
 
     Ok(())

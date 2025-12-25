@@ -29,6 +29,11 @@ impl Content {
     pub fn remove_file(contents: Vec<Content>) -> Vec<Content> {
         contents.into_iter().filter(|x| !x.is_file()).collect()
     }
+
+    pub fn sort(mut contents: Vec<Content>) -> Vec<Content> {
+        contents.sort_by(|a, b| a.folder_name.to_str().cmp(&b.folder_name.to_str()));
+        return contents;
+    }
 }
 
 #[cfg(test)]
